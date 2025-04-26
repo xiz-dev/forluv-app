@@ -1,0 +1,134 @@
+body {
+    background: #222;
+    user-select: none;
+}
+
+.container {
+    min-width: 320px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.heart {
+    position: relative;
+    left: 50%;
+    top: 150px;
+    width: auto;
+    transform: translateX(-50%);
+    display: inline-block;
+    z-index: 2;
+}
+
+.heart:hover {
+    cursor: pointer;
+}
+
+.heart .shape-heart {
+    transition: fill 0.25s ease-in;
+}
+
+.heart.active .shape-heart {
+    fill: #ff4136;
+}
+
+svg {
+    display: block;
+    width: 50px;
+    height: 50px;
+}
+
+.clickme {
+    position: relative;
+    left: 70%;
+    top: 130px;
+    transform: scale(4);
+    z-index: 1;
+}
+
+@media screen and (min-width: 480px) {
+    .clickme {
+        left: 60%;
+    }
+}
+
+.message {
+    position: fixed;
+    font-size: 32px;
+    color: white;
+    font-family: 'Kanit', Arial, sans-serif;
+    z-index: 1000;
+    animation: messageAppear 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes messageAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+        filter: blur(10px);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+        filter: blur(0);
+    }
+
+    40% {
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    60% {
+        transform: translate(-50%, -50%) scale(1.05);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+        filter: blur(10px);
+    }
+}
+
+.particle {
+    position: fixed;
+    background-color: white;
+    border-radius: 50%;
+    z-index: 999;
+    animation: particleMove 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+    mix-blend-mode: screen;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes particleMove {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.5);
+    }
+
+    20% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(calc(cos(var(--angle)) * var(--velocity) * 150px),
+                calc(sin(var(--angle)) * var(--velocity) * 150px)) scale(0.5);
+    }
+}
+
+.particle {
+    animation-delay: calc(var(--delay) * 1s);
+}
